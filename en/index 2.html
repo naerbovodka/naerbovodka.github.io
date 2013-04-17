@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>NÆRBØ</title>
+
+<link rel="stylesheet" href="proto-compiled.css">
+
+<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+
+<SCRIPT LANGUAGE="JavaScript1.2"> <!--
+
+function myAgeValidation() {
+
+    var lre = /^\s*/;
+    var datemsg = "";
+
+    var inputDate = document.ageform.myDate.value;
+    inputDate = inputDate.replace(lre, "");
+    document.ageform.myDate.value = inputDate;
+    datemsg = isValidDate(inputDate);
+        if (datemsg != "") {
+            alert(datemsg);
+            return;
+        }
+        else {
+            //Now find the Age based on the Birth Date
+            getAge(new Date(inputDate));
+        }
+
+}
+
+function getAge(birth) {
+
+    var today = new Date();
+    var nowyear = today.getFullYear();
+    var nowmonth = today.getMonth();
+    var nowday = today.getDate();
+
+    var birthyear = birth.getFullYear();
+    var birthmonth = birth.getMonth();
+    var birthday = birth.getDate();
+
+    var age = nowyear - birthyear;
+    var age_month = nowmonth - birthmonth;
+    var age_day = nowday - birthday;
+
+    if(age_month < 0 || (age_month == 0 && age_day <0)) {
+            age = parseInt(age) -1;
+        }
+
+
+    if ((age == 18 && age_month <= 0 && age_day <=0) || age < 18) {
+    document.getElementById('contentdiv').style.display = "none";
+    alert("Sorry you are " + age + ". You must be over 18 to enter this site.");
+    }
+    else {
+        document.getElementById('contentdiv').style.display = "block";
+    }
+
+}
+
+function isValidDate(dateStr) {
+
+
+    var msg = "";
+    // Checks for the following valid date formats:
+    // MM/DD/YY   MM/DD/YYYY   MM-DD-YY   MM-DD-YYYY
+    // Also separates date into month, day, and year variables
+
+    // To require a 2 & 4 digit year entry, use this line instead:
+    //var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{2}|\d{4})$/;
+    // To require a 4 digit year entry, use this line instead:
+    var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{4})$/;
+
+    var matchArray = dateStr.match(datePat); // is the format ok?
+    if (matchArray == null) {
+        msg = "Date is not in a valid format.";
+        return msg;
+    }
+
+    month = matchArray[1]; // parse date into variables
+    day = matchArray[3];
+    year = matchArray[4];
+
+
+    if (month < 1 || month > 12) { // check month range
+        msg = "Month must be between 1 and 12.";
+        return msg;
+    }
+
+    if (day < 1 || day > 31) {
+        msg = "Day must be between 1 and 31.";
+        return msg;
+    }
+
+    if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+        msg = "Month "+month+" doesn't have 31 days!";
+        return msg;
+    }
+
+    if (month == 2) { // check for february 29th
+    var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    if (day>29 || (day==29 && !isleap)) {
+        msg = "February " + year + " doesn't have " + day + " days!";
+        return msg;
+    }
+    }
+
+    if (day.charAt(0) == '0') day= day.charAt(1);
+
+    //Incase you need the value in CCYYMMDD format in your server program
+    //msg = (parseInt(year,10) * 10000) + (parseInt(month,10) * 100) + parseInt(day,10);
+
+    return msg;  // date is valid
+}
+
+// --> </SCRIPT>
+
+
+
+<style type="text/css">
+body {
+	font-family: Questrial;
+	text-align: center;
+}
+h1 {
+	font-weight: normal;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 100px;
+	color:#333;
+	padding: 0px;
+	margin: 30px;
+}
+.images {
+	text-align: center;
+}
+h2 {
+	font-weight: normal;
+	color: #333;
+}
+.block .center table {
+	text-align: left;
+}
+.imagetable {
+	text-align: right;
+}
+.footer {
+	font-size: x-small;
+</style></head>
+<body>
+<div class="block">
+<a href="/en"><img align="left" src="flag.png" width="16" height="11" /></a>
+
+<form name="ageform">
+Enter Birth Date to access site:  <input type="text" name="myDate" size=10 maxlength=10>
+<input type="button" value="Go" onclick="Javascript:myAgeValidation()">
+<br>(in MM/DD/YYYY format)
+</form>
+
+<div class="center">
+<h1 class="label">NÆRBØ	</h1>
+  </div>
+
+  <div class="center" style="display:none;" id="contentdiv">
+
+
+  <p style="color: #333;">Ludvik Bergström og Kåre Seljelid grunnlagt Naerbor Vodka i 2002. Deres signatur trippel destillasjon og filtrering behandling skaper ren, jevn vodka passer til alle anledninger. Hundrevis av essensen prosesser ble testet før, den perfekte kombinasjonen av bitter til søt ble funnet, opprette en full smakstilsatt utvalg av vodka.</p>
+
+
+
+
+  <table width="90%" border="0" cellspacing="10">
+    <tr>
+    <td width="30%" class="imagetable"><img src="black.jpg" width="100" height="100" /></td>
+    <td width="70%"><h2>Død
+      </h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisl nulla, tempus at fermentum gravida, rutrum ac lorem. Cras euismod ante sed urna gravida sodales. Nunc eu dolor sed tellus laoreet dictum. Suspendisse potenti. Ut tristique fringilla placerat. Morbi feugiat, justo at ultrices imperdiet, leo tortor dapibus enim, luctus dapibus ligula risus vel erat. Proin suscipit ultricies purus a vestibulum.</p></td>
+  </tr>
+  <tr>
+    <td class="imagetable"><img src="blue.jpg" width="100" height="100" /> </td>
+    <td><h2>Seriøsitet</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisl nulla, tempus at fermentum gravida, rutrum ac lorem. Cras euismod ante sed urna gravida sodales. Nunc eu dolor sed tellus laoreet dictum. Suspendisse potenti. Ut tristique fringilla placerat. Morbi feugiat, justo at ultrices imperdiet, leo tortor dapibus enim, luctus dapibus ligula risus vel erat. Proin suscipit ultricies purus a vestibulum.</p></td>
+  </tr>
+  <tr>
+    <td class="imagetable"><img src="red.jpg" width="100" height="100" /></td>
+    <td><h2>Sinne</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisl nulla, tempus at fermentum gravida, rutrum ac lorem. Cras euismod ante sed urna gravida sodales. Nunc eu dolor sed tellus laoreet dictum. Suspendisse potenti. Ut tristique fringilla placerat. Morbi feugiat, justo at ultrices imperdiet, leo tortor dapibus enim, luctus dapibus ligula risus vel erat. Proin suscipit ultricies purus a vestibulum.</p></td>
+  </tr>
+  <tr>
+    <td class="imagetable"><img src="green.jpg" width="100" height="100" /></td>
+    <td><h2>Misunne</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisl nulla, tempus at fermentum gravida, rutrum ac lorem. Cras euismod ante sed urna gravida sodales. Nunc eu dolor sed tellus laoreet dictum. Suspendisse potenti. Ut tristique fringilla placerat. Morbi feugiat, justo at ultrices imperdiet, leo tortor dapibus enim, luctus dapibus ligula risus vel erat. Proin suscipit ultricies purus a vestibulum.</p></td>
+  </tr>
+  <tr>
+    <td class="imagetable"><img src="yellow.jpg" width="100" height="100" /></td>
+    <td><h2>Håper</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisl nulla, tempus at fermentum gravida, rutrum ac lorem. Cras euismod ante sed urna gravida sodales. Nunc eu dolor sed tellus laoreet dictum. Suspendisse potenti. Ut tristique fringilla placerat. Morbi feugiat, justo at ultrices imperdiet, leo tortor dapibus enim, luctus dapibus ligula risus vel erat. Proin suscipit ultricies purus a vestibulum.</p></td>
+  </tr>
+</table>
+  <p><img src="header.jpg" width="70%"  /></p>
+
+  <div class="footer"><span class="footer"></span>
+  <p>2002-2013 DEN NÆRBØ COMPANY, RESERVERT ALLE RETTIGHETER. NYTE ANSVARLIG</p>
+  </div>
+  </div>
+</div>
+</body>
+</html>
